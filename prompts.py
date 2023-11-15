@@ -25,7 +25,7 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 ### Important: Do not import any external packages. You may only use the Lean 4 standard library.
 ''' if lang=='Lean4' else ''
 }### {lang}:""",
-                500, None, 5, check_proof, all_langs, 2)
+                500, None, 5, check_proof, all_langs, 15)
 problem_opt0 = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
 match e

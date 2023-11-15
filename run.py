@@ -22,12 +22,23 @@ def generate_complete(text, montecarlo):
     else:
         return generate_complete(text, montecarlo)
 
+def count_depth(node):
+    depth = 1
+    curr = node
+    
+    while (curr.parent is not None):
+        if curr.state != curr.parent.state:
+            depth += 1
+        curr = curr.parent
+
+    return depth
+
 def child_finder(node, montecarlo):
-    # check if the node's depth is at the max depth already. If so, update win value as -1
-    depth = node.count_depth()
-    if depth >= max_depth:
-        node.update_win_value(-1)
-        return
+    if max_depth is not None:
+        depth = count_depth(node)
+        if depth >= max_depth:
+            node.update_win_value(-100)
+            return
 
     text = generate_complete(node.state, montecarlo)
     if text is None:
