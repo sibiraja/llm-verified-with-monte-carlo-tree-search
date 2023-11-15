@@ -5,7 +5,7 @@ from montecarlo.montecarlo import MonteCarlo
 
 from lang import score_func, can_be_solution
 
-from prompts import prompt, expansion_count, min_lines, check_fun
+from prompts import prompt, expansion_count, min_lines, check_fun, max_depth
 
 montecarlo = MonteCarlo(Node(prompt))
 
@@ -23,6 +23,12 @@ def generate_complete(text, montecarlo):
         return generate_complete(text, montecarlo)
 
 def child_finder(node, montecarlo):
+    # check if the node's depth is at the max depth already. If so, update win value as -1
+    depth = node.count_depth()
+    if depth >= max_depth:
+        node.update_win_value(-1)
+        return
+
     text = generate_complete(node.state, montecarlo)
     if text is None:
         node.update_win_value(-1)

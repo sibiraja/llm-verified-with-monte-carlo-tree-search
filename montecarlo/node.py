@@ -47,6 +47,16 @@ class Node:
 
         return random.choice(best_children)
 
+    def count_depth(self):
+        depth = 1
+        curr = self
+        
+        while (curr.parent is not None):
+            depth += 1
+            curr = curr.parent
+
+        return depth
+
     def get_score(self, root_node):
         discovery_operand = (
             self.discovery_factor
